@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { SquareArrowOutUpRight } from "lucide-react";
 import { format } from "timeago.js";
+import URLToggle from "./url-toggle";
 
 type Props = {
   url: Url;
@@ -16,7 +17,7 @@ export default function MyURLsItem({
       <Card className="p-4 rounded-sm">
         <CardContent className="px-0 space-y-1">
           <CardTitle className="">{short}</CardTitle>
-          <p className="text-sm text-primary break-all line-clamp-2">{long}</p>
+          <URLToggle url={long} />
           <div className="text-sm flex gap-4">
             <p>{clicks} clicks</p>
             <span className="border-l"></span>
