@@ -12,15 +12,15 @@ export default function URLToggle({ url }: Props) {
 
   return (
     <TooltipContainer message={isCollapsed ? "Expand URL" : "Collapse URL"}>
-      <p
+      <button
         role="button"
-        className={`text-sm text-primary break-all cursor-pointer ${
+        className={`text-sm text-primary break-all cursor-pointer text-left ${
           isCollapsed && "line-clamp-2"
         }`}
         onClick={() => setIsCollapsed((prev) => !prev)}
       >
-        {url}
-      </p>
+        <span>{url}</span>
+      </button>
     </TooltipContainer>
   );
 }
