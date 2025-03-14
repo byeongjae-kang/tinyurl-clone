@@ -2,6 +2,7 @@ import Background from "@/components/layouts/background";
 import Header from "@/components/layouts/header";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { ReactNode } from "react";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -13,17 +14,18 @@ export const metadata: Metadata = {
   description: "This is for practicing NextJS"
 };
 
-export default function RootLayout({
-  children
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+type Props = Readonly<{
+  children: ReactNode;
+  myURLs: ReactNode;
+}>;
+
+export default function RootLayout({ children, myURLs }: Props) {
   return (
     <html lang="en">
       <body className={`${montserrat.className} antialiased`}>
         <Background />
-
         <Header />
+        {myURLs}
         {children}
       </body>
     </html>
