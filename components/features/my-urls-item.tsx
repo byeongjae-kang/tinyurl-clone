@@ -30,11 +30,12 @@ export default function MyURLsItem({
           </div>
           <div className="space-x-1">
             <Button
+              asChild
               size="icon"
               variant="outline"
               className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
             >
-              <Link href={long} target="_blank">
+              <Link href={`/${short}`} target="_blank">
                 <SquareArrowOutUpRight />
               </Link>
             </Button>
