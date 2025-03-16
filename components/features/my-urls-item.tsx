@@ -4,6 +4,8 @@ import { Url } from "@prisma/client";
 import { SquareArrowOutUpRight } from "lucide-react";
 import Link from "next/link";
 import { format } from "timeago.js";
+import ClipboardButton from "../core/clipboard-button";
+import TooltipContainer from "../core/tooltip-container";
 import URLToggle from "./url-toggle";
 
 type Props = {
@@ -29,16 +31,20 @@ export default function MyURLsItem({
             <p>{format(createdAt)}</p>
           </div>
           <div className="space-x-1">
-            <Button
-              asChild
-              size="icon"
-              variant="outline"
-              className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
-            >
-              <Link href={`/${short}`} target="_blank">
-                <SquareArrowOutUpRight />
-              </Link>
-            </Button>
+            <TooltipContainer message="Visit URL">
+              <Button
+                asChild
+                size="icon"
+                variant="outline"
+                className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
+              >
+                <Link href={`/${short}`} target="_blank">
+                  <SquareArrowOutUpRight />
+                </Link>
+              </Button>
+            </TooltipContainer>
+
+            <ClipboardButton text={`${BASE_URL}/${short}`} />
           </div>
         </CardContent>
       </Card>

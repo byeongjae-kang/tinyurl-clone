@@ -15,7 +15,7 @@ export default function TooltipContainer({ children, message }: Props) {
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>{children}</TooltipTrigger>
+        <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent className="bg-secondary text-secondary-foreground font-medium text-sm">
           <p>{message}</p>
         </TooltipContent>
