@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { deleteURL } from "@/lib/actions/urls";
 import { Url } from "@prisma/client";
-import { SquareArrowOutUpRight } from "lucide-react";
-import Link from "next/link";
 import { format } from "timeago.js";
 import ClipboardButton from "../core/clipboard-button";
-import TooltipContainer from "../core/tooltip-container";
+import LinkButton from "../core/link-button";
+import DeleteURLForm from "./delete-url-button";
 import URLToggle from "./url-toggle";
 
 type Props = {
@@ -15,7 +14,7 @@ type Props = {
 const BASE_URL = process.env.BASE_URL;
 
 export default function MyURLsItem({
-  url: { short, long, clicks, createdAt }
+  url: { id, short, long, clicks, createdAt }
 }: Props) {
   return (
     <li>
@@ -30,21 +29,10 @@ export default function MyURLsItem({
             <span className="border-l"></span>
             <p>{format(createdAt)}</p>
           </div>
-          <div className="space-x-1">
-            <TooltipContainer message="Visit URL">
-              <Button
-                asChild
-                size="icon"
-                variant="outline"
-                className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
-              >
-                <Link href={`/${short}`} target="_blank">
-                  <SquareArrowOutUpRight />
-                </Link>
-              </Button>
-            </TooltipContainer>
-
+          <div className="space-x-1 flex items-center">
+            <LinkButton href={`/${short}`} />
             <ClipboardButton text={`${BASE_URL}/${short}`} />
+            <DeleteURLForm deleteAction={deleteURL.bind(null, id)} />
           </div>
         </CardContent>
       </Card>
