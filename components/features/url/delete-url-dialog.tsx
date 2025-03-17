@@ -1,3 +1,4 @@
+import TooltipContainer from "@/components/core/tooltip-container";
 import DeleteURLButton from "@/components/features/url/delete-url-button";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,15 +20,17 @@ type Props = {
 export function DeleteURLDialog({ deleteAction }: Props) {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button
-          className="border-destructive text-destructive hover:bg-destructive hover:text-white"
-          variant="outline"
-          size="icon"
-        >
-          <Trash className="size-5" />
-        </Button>
-      </DialogTrigger>
+      <TooltipContainer message="Delete URL">
+        <DialogTrigger asChild>
+          <Button
+            className="border-destructive text-destructive hover:bg-destructive hover:text-white"
+            variant="outline"
+            size="icon"
+          >
+            <Trash className="size-5" />
+          </Button>
+        </DialogTrigger>
+      </TooltipContainer>
       <DialogContent className="sm:max-w-[425px] gap-6">
         <DialogHeader>
           <DialogTitle>Are you sure?</DialogTitle>
