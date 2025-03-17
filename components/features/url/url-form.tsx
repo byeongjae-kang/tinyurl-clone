@@ -1,9 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
 import SelectInput from "@/components/core/select-input";
 import TextInput from "@/components/core/text-input";
 import { Button } from "@/components/ui/button";
@@ -16,7 +12,12 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { SelectItem } from "@/components/ui/select";
-import { Link2, WandSparkles } from "lucide-react";
+import { createURL, PayloadType, StateType } from "@/lib/actions/urls";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CircleX, Link2, Loader, WandSparkles } from "lucide-react";
+import { startTransition, useActionState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 const formSchema = z.object({
   long: z
@@ -32,6 +33,13 @@ const formSchema = z.object({
 });
 
 export function URLForm() {
+  const [state, action, isPending] = useActionState<StateType, PayloadType>(
+    createURL,
+    {
+      message: ""
+    }
+  );
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,9 +51,9 @@ export function URLForm() {
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    startTransition(() => {
+      action({ long: values.long });
+    });
   }
 
   return (
@@ -101,8 +109,20 @@ export function URLForm() {
           type="submit"
           className="w-full p-6 text-base font-semibold rounded-xl"
         >
-          Shorten URL
+          {isPending ? (
+            <>
+              <Loader /> <span>Shortening URL...</span>
+            </>
+          ) : (
+            "Shorten URL"
+          )}
         </Button>
+
+        {state.message && (
+          <p className="text-destructive flex gap-2 font-medium break-all">
+            <CircleX /> <span>{state.message}</span>
+          </p>
+        )}
       </form>
     </Form>
   );

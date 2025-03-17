@@ -1,5 +1,7 @@
+import { DeleteURLDialog } from "@/components/features/url/delete-url-dialog";
 import MyURLsItem from "@/components/features/url/my-urls-item";
 import { Button } from "@/components/ui/button";
+import { deleteAllURLs } from "@/lib/actions/urls";
 import { prisma } from "@/lib/prisma";
 
 export default async function MyURLSList() {
@@ -19,9 +21,11 @@ export default async function MyURLSList() {
           No {urls.length > 0 && "more"} recent URLs in your history
         </p>
         {urls.length > 0 && (
-          <Button size="sm" variant="secondary">
-            Clear History
-          </Button>
+          <DeleteURLDialog deleteAction={deleteAllURLs}>
+            <Button size="sm" variant="secondary">
+              Clear History
+            </Button>
+          </DeleteURLDialog>
         )}
       </li>
     </ul>

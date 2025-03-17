@@ -11,32 +11,25 @@ import {
   DialogTitle,
   DialogTrigger
 } from "@/components/ui/dialog";
-import { Trash } from "lucide-react";
+import { ReactNode } from "react";
 
 type Props = {
   deleteAction: () => void;
+  children: ReactNode;
 };
 
-export function DeleteURLDialog({ deleteAction }: Props) {
+export function DeleteURLDialog({ children, deleteAction }: Props) {
   return (
     <Dialog>
-      <TooltipContainer message="Delete URL">
-        <DialogTrigger asChild>
-          <Button
-            className="border-destructive text-destructive hover:bg-destructive hover:text-white"
-            variant="outline"
-            size="icon"
-          >
-            <Trash className="size-5" />
-          </Button>
-        </DialogTrigger>
+      <TooltipContainer message="Delete URL(s)">
+        <DialogTrigger asChild>{children}</DialogTrigger>
       </TooltipContainer>
       <DialogContent className="sm:max-w-[425px] gap-6">
         <DialogHeader>
           <DialogTitle>Are you sure?</DialogTitle>
           <DialogDescription>
-            Once you delete the url, it would be permanently gone. Do you want
-            to proceed?
+            Once you delete, data would be lost permanently. Do you want to
+            proceed?
           </DialogDescription>
         </DialogHeader>
 

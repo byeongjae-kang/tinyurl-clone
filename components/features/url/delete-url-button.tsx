@@ -9,7 +9,7 @@ export default function DeleteURLButton({ deleteAction }: Props) {
   return (
     <Form className="w-full sm:w-fit" action={deleteAction}>
       <Button className="w-full bg-destructive hover:bg-destructive/80">
-        Save changes
+        Confirm
       </Button>
     </Form>
   );
