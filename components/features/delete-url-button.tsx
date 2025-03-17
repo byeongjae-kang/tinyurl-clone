@@ -1,20 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
 import Form from "next/form";
 
 type Props = {
   deleteAction: () => void;
 };
 
-export default function DeleteURLForm({ deleteAction }: Props) {
+export default function DeleteURLButton({ deleteAction }: Props) {
   return (
-    <Form action={deleteAction}>
-      <Button
-        className="border-destructive text-destructive hover:bg-destructive hover:text-white"
-        variant="outline"
-        size="icon"
-      >
-        <Trash className="size-5" />
+    <Form className="w-full sm:w-fit" action={deleteAction}>
+      <Button className="w-full bg-destructive hover:bg-destructive/80">
+        Save changes
       </Button>
     </Form>
   );

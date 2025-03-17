@@ -4,7 +4,7 @@ import { Url } from "@prisma/client";
 import { format } from "timeago.js";
 import ClipboardButton from "../core/clipboard-button";
 import LinkButton from "../core/link-button";
-import DeleteURLForm from "./delete-url-button";
+import { DeleteURLDialog } from "./delete-url-dialog";
 import URLToggle from "./url-toggle";
 
 type Props = {
@@ -32,7 +32,7 @@ export default function MyURLsItem({
           <div className="space-x-1 flex items-center">
             <LinkButton href={`/${short}`} />
             <ClipboardButton text={`${BASE_URL}/${short}`} />
-            <DeleteURLForm deleteAction={deleteURL.bind(null, id)} />
+            <DeleteURLDialog deleteAction={deleteURL.bind(null, id)} />
           </div>
         </CardContent>
       </Card>
