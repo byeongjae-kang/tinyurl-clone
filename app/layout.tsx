@@ -1,3 +1,4 @@
+import Container from "@/components/core/container";
 import Background from "@/components/layouts/background";
 import Header from "@/components/layouts/header";
 import type { Metadata } from "next";
@@ -26,7 +27,9 @@ export default function RootLayout({ children, myURLs }: Props) {
         <Background />
         <Header />
         {myURLs}
-        {children}
+        <main>
+          <Container>{children}</Container>
+        </main>
       </body>
     </html>
   );
