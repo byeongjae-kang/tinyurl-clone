@@ -1,11 +1,12 @@
+import ClipboardButton from "@/components/core/clipboard-button";
+import LinkButton from "@/components/core/link-button";
+
+import { DeleteURLDialog } from "@/components/features/url/delete-url-dialog";
+import URLToggle from "@/components/features/url/url-toggle";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { deleteURL } from "@/lib/actions/urls";
 import { Url } from "@prisma/client";
 import { format } from "timeago.js";
-import ClipboardButton from "../core/clipboard-button";
-import LinkButton from "../core/link-button";
-import { DeleteURLDialog } from "./delete-url-dialog";
-import URLToggle from "./url-toggle";
 
 type Props = {
   url: Url;

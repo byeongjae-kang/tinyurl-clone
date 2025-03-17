@@ -1,6 +1,6 @@
+import MyURLsItem from "@/components/features/url/my-urls-item";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
-import MyURLsItem from "./my-urls-item";
 
 export default async function MyURLSList() {
   const urls = await prisma.url.findMany({

@@ -1,5 +1,5 @@
+import MyURLSList from "@/components/features/url/my-urls-list";
 import { Button } from "@/components/ui/button";
-import MyURLSList from "./my-urls-list";
 
 export default function MyURLsSection() {
   return (

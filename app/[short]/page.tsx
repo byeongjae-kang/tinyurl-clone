@@ -1,4 +1,4 @@
-import RedirectLoading from "@/components/features/redirect-loading";
+import RedirectLoading from "@/components/features/url/redirect-loading";
 import { incrementClicks } from "@/lib/actions/urls";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";

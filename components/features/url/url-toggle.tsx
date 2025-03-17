@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import TooltipContainer from "../core/tooltip-container";
+import TooltipContainer from "../../core/tooltip-container";
 
 type Props = {
   url: string;

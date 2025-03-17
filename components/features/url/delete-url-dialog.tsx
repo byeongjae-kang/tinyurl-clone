@@ -1,6 +1,8 @@
+import DeleteURLButton from "@/components/features/url/delete-url-button";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -8,9 +10,7 @@ import {
   DialogTitle,
   DialogTrigger
 } from "@/components/ui/dialog";
-import { DialogClose } from "@radix-ui/react-dialog";
 import { Trash } from "lucide-react";
-import DeleteURLButton from "./delete-url-button";
 
 type Props = {
   deleteAction: () => void;
