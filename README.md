@@ -35,7 +35,7 @@ This is a TinyURL clone built with modern web technologies.
 3. Install dependencies:
 
    ```sh
-   npm install
+   npm install --legacy-peer-deps
    ```
 
 4. Run Prisma migrations to set up the database:
