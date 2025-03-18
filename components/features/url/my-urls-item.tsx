@@ -14,7 +14,7 @@ type Props = {
   url: Url;
 };
 
-const BASE_URL = process.env.BASE_URL;
+export const BASE_URL = process.env.BASE_URL;
 
 export default function MyURLsItem({
   url: { id, short, long, clicks, createdAt }

@@ -12,10 +12,9 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { SelectItem } from "@/components/ui/select";
-import { createURL, PayloadType, StateType } from "@/lib/actions/urls";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Url } from "@prisma/client";
 import { CircleX, Link2, Loader, WandSparkles } from "lucide-react";
-import { startTransition, useActionState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -32,14 +31,13 @@ const formSchema = z.object({
   alias: z.string().optional()
 });
 
-export function URLForm() {
-  const [state, action, isPending] = useActionState<StateType, PayloadType>(
-    createURL,
-    {
-      message: ""
-    }
-  );
+type Props = {
+  onSubmit: (long: Url["long"]) => void;
+  isPending: boolean;
+  error?: string;
+};
 
+export function URLForm({ onSubmit, isPending, error }: Props) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,16 +47,13 @@ export function URLForm() {
     }
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    startTransition(() => {
-      action({ long: values.long });
-    });
+  function handleSubmit(values: z.infer<typeof formSchema>) {
+    onSubmit(values.long);
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
         <FormField
           control={form.control}
           name="long"
@@ -105,22 +100,14 @@ export function URLForm() {
             )}
           />
         </div>
-        <Button
-          type="submit"
-          className="w-full p-6 text-base font-semibold rounded-xl"
-        >
-          {isPending ? (
-            <>
-              <Loader /> <span>Shortening URL...</span>
-            </>
-          ) : (
-            "Shorten URL"
-          )}
+        <Button className="w-full p-6 text-base font-semibold rounded-xl">
+          {isPending && <Loader />}
+          {isPending ? "Shortening URL..." : "Shorten URL"}
         </Button>
 
-        {state.message && (
+        {error && (
           <p className="text-destructive flex gap-2 font-medium break-all">
-            <CircleX /> <span>{state.message}</span>
+            <CircleX /> <span>{error}</span>
           </p>
         )}
       </form>

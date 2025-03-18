@@ -6,10 +6,13 @@ import { Prisma, Url } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
 
-export type StateType = { message: string };
+export type StateType = { short: string; error: string };
 export type PayloadType = { long: Url["long"] };
 
-export const createURL = async (state: StateType, { long }: PayloadType) => {
+export const createURL = async (
+  state: StateType,
+  { long }: PayloadType
+): Promise<StateType> => {
   const data = {
     userId: "1",
     short: createRandomString(),
@@ -17,15 +20,19 @@ export const createURL = async (state: StateType, { long }: PayloadType) => {
   } satisfies Prisma.UrlUncheckedCreateInput;
 
   try {
-    await prisma.url.create({ data });
+    const created = await prisma.url.create({ data });
 
     revalidatePath("/app/my-urls");
 
-    return state;
+    return {
+      ...state,
+      short: created.short
+    };
   } catch (err) {
     console.error(err);
     return {
-      message: `Something has gone wrong while creating url, try again! `
+      ...state,
+      error: `Something has gone wrong while creating url, try again! `
     };
   }
 };
