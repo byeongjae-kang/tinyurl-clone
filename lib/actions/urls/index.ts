@@ -69,7 +69,13 @@ export const deleteURL = async (id: Url["id"]) => {
 };
 
 export const deleteAllURLs = async () => {
-  await prisma.url.deleteMany({ where: { userId: "1" } });
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("Please sign in in order to generate the shortened url.");
+  }
+
+  await prisma.url.deleteMany({ where: { userId } });
 
   revalidatePath("/app/my-urls");
 };
