@@ -1,6 +1,8 @@
 # TinyURL Clone
 
-This is a TinyURL clone built with modern web technologies. Watch the demo and setup guide on my YouTube channel: [@bartingyo](https://youtube.com/@bartingyo?si=NzZVgkMxTTItqw7y).
+This is a TinyURL clone built with modern web technologies. 
+- Watch the demo and setup guide on my YouTube channel: [@bartingyo](https://youtube.com/@bartingyo?si=NzZVgkMxTTItqw7y).
+- Delployed with Vercel: [tinyurl-clone](https://tinyurl-clone-two.vercel.app/). 
 
 ## Getting Started
 
