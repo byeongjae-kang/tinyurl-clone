@@ -1,6 +1,7 @@
 import Container from "@/components/core/container";
 import Background from "@/components/layouts/background";
 import Header from "@/components/layouts/header";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { ReactNode } from "react";
@@ -22,15 +23,17 @@ type Props = Readonly<{
 
 export default function RootLayout({ children, myURLs }: Props) {
   return (
-    <html lang="en">
-      <body className={`${montserrat.className} antialiased`}>
-        <Background />
-        <Header />
-        {myURLs}
-        <main>
-          <Container>{children}</Container>
-        </main>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${montserrat.className} antialiased`}>
+          <Background />
+          <Header />
+          {myURLs}
+          <main>
+            <Container>{children}</Container>
+          </main>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -4,10 +4,12 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger
 } from "@/components/ui/sheet";
+import { SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { Menu, XIcon } from "lucide-react";
 
 export default function MobileMenu() {
@@ -37,6 +39,17 @@ export default function MobileMenu() {
         </SheetHeader>
 
         <Navigation />
+
+        <SheetFooter>
+          <SignedOut>
+            <SignUpButton>
+              <Button variant="secondary">Sign Up</Button>
+            </SignUpButton>
+            <SignInButton>
+              <Button>Sign In</Button>
+            </SignInButton>
+          </SignedOut>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

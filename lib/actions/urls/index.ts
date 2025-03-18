@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { createRandomString } from "@/lib/string/random";
+import { auth } from "@clerk/nextjs/server";
 import { Prisma, Url } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
@@ -13,13 +14,19 @@ export const createURL = async (
   state: StateType,
   { long }: PayloadType
 ): Promise<StateType> => {
-  const data = {
-    userId: "1",
-    short: createRandomString(),
-    long
-  } satisfies Prisma.UrlUncheckedCreateInput;
-
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      throw new Error("Please sign in in order to generate the shortened url.");
+    }
+
+    const data = {
+      userId,
+      short: createRandomString(),
+      long
+    } satisfies Prisma.UrlUncheckedCreateInput;
+
     const created = await prisma.url.create({ data });
 
     revalidatePath("/app/my-urls");
@@ -29,10 +36,9 @@ export const createURL = async (
       short: created.short
     };
   } catch (err) {
-    console.error(err);
     return {
       ...state,
-      error: `Something has gone wrong while creating url, try again! `
+      error: (err as Error).message
     };
   }
 };

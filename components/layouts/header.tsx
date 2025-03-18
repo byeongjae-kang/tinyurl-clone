@@ -1,6 +1,7 @@
 import Container from "@/components/core/container";
 import Logo from "@/components/layouts/logo";
 import MobileMenu from "@/components/layouts/mobile-menu";
+import { SignedIn, UserButton } from "@clerk/nextjs";
 
 export default function Header() {
   return (
@@ -8,8 +9,11 @@ export default function Header() {
       <Container className="container mx-auto p-4 flex items-center justify-between">
         <Logo />
 
-        <div>
+        <div className="space-x-2">
           <MobileMenu />
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
       </Container>
     </header>

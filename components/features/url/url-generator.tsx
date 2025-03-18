@@ -4,7 +4,7 @@ import { URLForm } from "@/components/features/url/url-form";
 import URLShortened from "@/components/features/url/url-result";
 import { PayloadType, StateType, createURL } from "@/lib/actions/urls";
 import { Url } from "@prisma/client";
-import { startTransition, useActionState, useState } from "react";
+import { startTransition, useActionState, useEffect, useState } from "react";
 
 export default function URLGenerator() {
   const [isShortened, setIsShortened] = useState<boolean>(false);
@@ -14,10 +14,15 @@ export default function URLGenerator() {
     PayloadType
   >(createURL, { short: "", error: "" });
 
+  useEffect(() => {
+    if (!error && short) {
+      setIsShortened(true);
+    }
+  }, [short, error]);
+
   function handleSubmit(long: Url["long"]) {
     startTransition(() => {
       action({ long });
-      setIsShortened(true);
       setLongURL(long);
     });
   }
