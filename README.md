@@ -6,12 +6,12 @@ This is a TinyURL clone built with modern web technologies. Watch the demo and s
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (Latest LTS recommended)
-- [Next.js](https://nextjs.org/) (Used for building the frontend)
-- [TypeScript](https://www.typescriptlang.org/) (Ensure it's installed globally or in the project)
-- [Prisma](https://www.prisma.io/) (for database ORM)
-- [PostgreSQL](https://www.postgresql.org/) (Ensure it's running and accessible)
-- [Clerk](https://clerk.dev/) (For authentication management)
+- [Node.js](https://nodejs.org/) (**Latest LTS recommended**)
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Prisma](https://www.prisma.io/) 
+- [PostgreSQL](https://www.postgresql.org/) (**Ensure it's running and accessible**)
+- [Clerk](https://clerk.dev/)
 
 ### Installation
 
